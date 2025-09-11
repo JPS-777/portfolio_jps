@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Pablo Santangelo - Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: #fff;
+            padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+        
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav a:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Sections */
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+        
+        .section:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+        
+        .section h2 {
+            color: #764ba2;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .card-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-category h4 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .skill-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 25px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        /* Languages */
+        .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .language-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.3s ease;
+        }
+        
+        .language-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .language-name {
+            font-weight: bold;
+            display: block;
+        }
+        
+        .language-level {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-link {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="profile-img"></div>
+            <h1>Juan Pablo Santangelo</h1>
+            <p class="subtitle">Lawyer & Political Scientist | MA Public and Social Policies - Data Science | PhD Candidate</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>juan.pablo.santangelo@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+34 610 34 2581</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <span>LinkedIn: JPS</span>
+                </div>
+                <div class="contact-item">
+                    <span>💻</span>
+                    <span>GitHub: JPS-777</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Featured Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#honors">Honors</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Professional Profile -->
+        <section id="profile" class="section">
+            <h2>Professional Profile</h2>
+            <p style="font-size: 1.1rem; text-align: justify; line-height: 1.8;">
+                PhD candidate, attorney and political scientist with expertise in public affairs, innovation, and data 
+                analysis. As a former Research Assistant, I contributed to theoretical and applied research on 
+                migration. My experience includes managing European projects focused on digitalization and 
+                integrating innovative services. As a senior consultant, I deliver cutting-edge solutions that drive 
+                strategic impact.
+            </p>
+
+            <!-- Key Statistics -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Clients Advised</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Stakeholders Managed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Dashboards Created</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">Reporting Time Reduction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Parliamentary Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Publications</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section id="experience" class="section">
+            <h2>Featured Professional Experience</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Senior Consultant - Data Policy Officer & Public Affairs</h3>
+                    <div class="card-meta">LLYC | March 2024 - Present</div>
+                    <ul>
+                        <li><strong>Strategic Consulting:</strong> Advised 20+ clients across energy, tech, and food sectors</li>
+                        <li><strong>Stakeholder Management:</strong> Built and maintained relationships with 50+ key stakeholders</li>
+                        <li><strong>Interactive Dashboards:</strong> Designed 15+ dashboards with Looker Studio and Power BI</li>
+                        <li><strong>Process Automation:</strong> Reduced manual reporting time by 40% using Python</li>
+                        <li><strong>AI Legislab:</strong> Transforming legislative data into strategic intelligence</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Policy Advisor</h3>
+                    <div class="card-meta">National Congress of Argentina | March 2015 - December 2019</div>
+                    <ul>
+                        <li><strong>Major Events:</strong> Arranged 3 major events on accessibility awareness and disability rights</li>
+                        <li><strong>Strategic Partnerships:</strong> Fostered 10+ creative partnerships with key opinion leaders</li>
+                        <li><strong>Policy Monitoring:</strong> Monitored key countries across Latin America and collected 15+ public policies</li>
+                        <li><strong>Resource Management:</strong> Managed 50+ consultants and marshalled resources</li>
+                        <li><strong>Legislative Projects:</strong> Directed 30+ parliamentary projects and drafted 8 bills</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Research Assistant</h3>
+                    <div class="card-meta">GRITIM - Pompeu Fabra University | February 2022 - September 2023</div>
+                    <ul>
+                        <li><strong>Applied Research:</strong> Built 5 reports with statistical insights for local governance</li>
+                        <li><strong>Academic Publications:</strong> Contributed to 1 book and 10 papers</li>
+                        <li><strong>Process Optimization:</strong> 50% reduction in preparation time for standard materials</li>
+                        <li><strong>International Events:</strong> Organized 3 major events with Australian, Canadian and Mediterranean universities</li>
+                        <li><strong>Digital Impact:</strong> 20% increase in GRITIM website visits</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section id="projects" class="section">
+            <h2>Featured Projects</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>AI Legislab - Legislative Intelligence</h3>
+                    <div class="card-meta">Current Project - LLYC</div>
+                    <p>Development of a platform combining Google Cloud, AI, massive web scraping, and React to transform legislative data into strategic intelligence for public and private sector clients.</p>
+                    <strong>Technologies:</strong> Google Cloud, React, Python, AI/ML, BigQuery
+                </div>
+
+                <div class="card">
+                    <h3>Manifesto for City Governance of Mediterranean Migration</h3>
+                    <div class="card-meta">GRITIM - Pompeu Fabra University</div>
+                    <p>Applied research resulting in statistical insights capable of improving up to 10 points in local governance metrics in Mediterranean cities.</p>
+                    <strong>Impact:</strong> Potential improvement in local governance metrics
+                </div>
+
+                <div class="card">
+                    <h3>Process Optimization with Python</h3>
+                    <div class="card-meta">LLYC - Automation</div>
+                    <p>Implementation of automated solutions that reduced manual report generation time by 40%, significantly improving operational efficiency.</p>
+                    <strong>Result:</strong> 40% reduction in reporting time
+                </div>
+
+                <div class="card">
+                    <h3>Colab to BigQuery Migration</h3>
+                    <div class="card-meta">LLYC - Data Optimization</div>
+                    <p>Led migration of analytical projects from Google Colab to BigQuery, optimizing data processing and improving analysis scalability.</p>
+                    <strong>Benefit:</strong> Enhanced scalability and data processing
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <h2>Technical & Professional Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Data Analysis & BI</h4>
+                    <div class="skill-item">PowerBI (Advanced)</div>
+                    <div class="skill-item">Looker Studio (Advanced)</div>
+                    <div class="skill-item">SQL (Intermediate)</div>
+                    <div class="skill-item">BigQuery (Intermediate)</div>
+                    <div class="skill-item">R (Intermediate)</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Programming & Development</h4>
+                    <div class="skill-item">Python (Intermediate)</div>
+                    <div class="skill-item">HTML (Advanced)</div>
+                    <div class="skill-item">CSS (Intermediate)</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Vercel v0</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Cloud & Tools</h4>
+                    <div class="skill-item">Google Cloud</div>
+                    <div class="skill-item">MS Office (Advanced)</div>
+                    <div class="skill-item">Gamma</div>
+                    <div class="skill-item">Kumu (Stakeholder Mapping)</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Research & Policy</h4>
+                    <div class="skill-item">Quantitative and Qualitative Research</div>
+                    <div class="skill-item">Public Policy</div>
+                    <div class="skill-item">Legislative Analysis</div>
+                    <div class="skill-item">Stakeholder Management</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="section">
+            <h2>Academic Formation</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>PhD in Law</h3>
+                    <div class="card-meta">Rovira i Virgili University | May 2025 - October 2028</div>
+                    <p>PhD candidate with focus on public policy and data analysis applied to law.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Master in Data Science</h3>
+                    <div class="card-meta">Nuclio Digital School - UVic University | May - October 2023</div>
+                    <p>Specialization in advanced data analysis techniques, machine learning and visualization.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Master in Public and Social Policies</h3>
+                    <div class="card-meta">Barcelona School of Management - Pompeu Fabra - Johns Hopkins | 2019-2021</div>
+                    <p>Interdisciplinary training in design, implementation and evaluation of public policies.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Law Degree</h3>
+                    <div class="card-meta">National University of La Plata | March 2013 - September 2018</div>
+                    <p>Second degree in Law with specialization in public and legislative law.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Bachelor in Political Science</h3>
+                    <div class="card-meta">University of San Andrés, Buenos Aires | March 2010 - June 2013</div>
+                    <p>First degree with focus on political analysis, public policies and institutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages" class="section">
+            <h2>Language Competencies</h2>
+            <div class="languages-list">
+                <div class="language-item">
+                    <span class="language-name">Spanish</span>
+                    <span class="language-level">Native</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">English</span>
+                    <span class="language-level">Advanced (C1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Italian</span>
+                    <span class="language-level">Advanced (C1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">French</span>
+                    <span class="language-level">Intermediate (B2.1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Portuguese</span>
+                    <span class="language-level">Basic (A1)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Honors and Recognition -->
+        <section id="honors" class="section">
+            <h2>Honors and Recognition</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Regional Academy on the United Nations (RAUN) <span class="badge">2025</span></h3>
+                    <div class="card-meta">2025-2026 - Barcelona</div>
+                    <p>Selected participant for the Regional Academy on the United Nations under the theme "Global Transformation for Future Generations." First session: October 13-15, 2025 in Barcelona.</p>
+                </div>
+
+                <div class="card">
+                    <h3>HERA Research Project Scholarship</h3>
+                    <div class="card-meta">2022 - Pompeu Fabra University</div>
+                    <p>Research scholarship for the project "Public Spaces: Culture and Integration in Europe"</p>
+                </div>
+
+                <div class="card">
+                    <h3>Konrad Adenauer Stiftung Foundation</h3>
+                    <div class="card-meta">2016 - Hidalgo City, Mexico</div>
+                    <p>Scholarship for political training program in "Political Competence and Humanism"</p>
+                </div>
+
+                <div class="card">
+                    <h3>Fulbright Scholarship</h3>
+                    <div class="card-meta">2015 - United States</div>
+                    <p>International Seminar for Young Leaders on "The United States today: the foundations of foreign and domestic politics"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section class="section">
+            <h2>Publications</h2>
+            <div class="card">
+                <h3>Climate Justice, Migration and Refuge in Catalonia</h3>
+                <div class="card-meta">Santangelo, J.P & Zapata-Barrero, R. (December 4th, 2023)</div>
+                <p>Published by Fundació ACSAR. A comprehensive analysis of climate justice issues related to migration and refugee situations in Catalonia.</p>
+                <a href="https://l1nq.com/VzBWE" target="_blank" style="color: #764ba2; text-decoration: none; font-weight: bold;">View Publication →</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h3>Interested in Collaborating?</h3>
+            <p>I am available for consulting projects in public policy, data analysis and digital transformation.</p>
+            
+            <div class="social-links">
+                <a href="mailto:juan.pablo.santangelo@gmail.com" class="social-link" title="Email">📧</a>
+                <a href="https://www.linkedin.com/in/juan-pablo-santangelo" class="social-link" title="LinkedIn">💼</a>
+                <a href="https://github.com/JPS-777" class="social-link" title="GitHub">💻</a>
+                <a href="tel:+34610342581" class="social-link" title="Phone">📱</a>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.8;">
+                © 2024 Juan Pablo Santangelo. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation for statistics
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Typing effect for main title (optional)
+        const title = document.querySelector('.header h1');
+        if (title) {
+            const text = title.textContent;
+            title.textContent = '';
+            let index = 0;
+            
+            const typeWriter = () => {
+                if (index < text.length) {
+                    title.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        }
+    </script>
+</body>
+</html>
