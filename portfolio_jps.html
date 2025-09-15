@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Pablo Santangelo - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: url('./profile.png') center/cover;;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .nav-menu {
+            transition: all 0.3s ease;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid #cbd5e1;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            color: white;
+            border-radius: 10px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h4 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-item {
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 25px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Languages */
+        .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .language-item {
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-item:hover {
+            transform: scale(1.05);
+        }
+
+        .language-name {
+            font-weight: bold;
+            display: block;
+        }
+
+        .language-level {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        /* Contact Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #1e3c72;
+        }
+
+        .contact-modal-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f1f5f9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-modal-item:hover {
+            background: #e2e8f0;
+            transform: translateX(5px);
+        }
+
+        .contact-modal-item .icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-modal-item .info h4 {
+            color: #1e3c72;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .contact-modal-item .info p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #1e3c72, #3b82f6);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .copy-success {
+            background: #10b981 !important;
+        }
+
+        /* Responsive Design - Mobile First Approach */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                z-index: 999;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0;
+            }
+
+            .nav a {
+                padding: 0.8rem 1.5rem;
+                display: block;
+                border-radius: 0;
+                border-bottom: 1px solid #f1f1f1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding: 1.5rem 0;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .contact-info {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-item {
+                padding: 0.7rem 1.2rem;
+                min-width: 120px;
+                justify-content: center;
+            }
+
+            .nav {
+                padding: 0.8rem 0;
+            }
+
+            .section {
+                padding: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .card {
+                padding: 1.2rem;
+            }
+
+            .card h3 {
+                font-size: 1.1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .skill-category h4 {
+                font-size: 1.1rem;
+            }
+
+            .languages-list {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .language-item {
+                min-width: 100px;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .modal-content {
+                margin: 15% auto;
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .contact-modal-item {
+                padding: 0.8rem;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .contact-modal-item .info {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .contact-modal-item .info p {
+                word-break: break-all;
+                font-size: 0.8rem;
+            }
+
+            .copy-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Tablet Design */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-info {
+                gap: 1.5rem;
+            }
+
+            .nav ul {
+                gap: 1.5rem;
+            }
+
+            .section {
+                padding: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop improvements */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for better accessibility */
+        .contact-item:focus,
+        .nav a:focus,
+        .social-link:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="profile-img"></div>
+            <h1>Juan Pablo Santangelo</h1>
+            <p class="subtitle">Lawyer & Political Scientist | MA Public and Social Policies - Data Science | PhD Candidate</p>
+            
+            <div class="contact-info">
+                <div class="contact-item" onclick="openContactModal()">
+                    <span>📧</span>
+                    <span>Email</span>
+                </div>
+                <div class="contact-item" onclick="openContactModal()">
+                    <span>📱</span>
+                    <span>Phone</span>
+                </div>
+                <div class="contact-item" onclick="openContactModal()">
+                    <span>🌐</span>
+                    <span>LinkedIn</span>
+                </div>
+                <div class="contact-item" onclick="openContactModal()">
+                    <span>💻</span>
+                    <span>GitHub</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="#profile" onclick="closeMobileMenu()">Profile</a></li>
+                        <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
+                        <li><a href="#projects" onclick="closeMobileMenu()">Featured projects</a></li>
+                        <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+                        <li><a href="#education" onclick="closeMobileMenu()">Education</a></li>
+                        <li><a href="#languages" onclick="closeMobileMenu()">Languages</a></li>
+                        <li><a href="#honors" onclick="closeMobileMenu()">Honors</a></li>
+                        <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Professional Profile -->
+        <section id="profile" class="section">
+            <h2>Professional profile</h2>
+            <p style="font-size: 1.1rem; text-align: justify; line-height: 1.8;">
+                PhD candidate, attorney and political scientist with expertise in public affairs, innovation, and data 
+                analysis. As a former Research Assistant, I contributed to theoretical and applied research on 
+                migration. My experience includes managing European projects focused on digitalization and 
+                integrating innovative services. As a senior consultant, I deliver cutting-edge solutions that drive 
+                strategic impact.
+            </p>
+
+            <!-- Key Statistics -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Clients advised</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Stakeholders managed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Dashboards created</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">40%</span>
+                    <span class="stat-label">Reporting time reduction</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">Parliamentary projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Bills drafted</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section id="experience" class="section">
+            <h2>Professional experience</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Senior consultant - Data policy officer & Public affairs</h3>
+                    <div class="card-meta">LLYC | March 2024 - Present</div>
+                    <ul>
+                        <li><strong>Strategic consulting:</strong> Advised 20+ clients across energy, tech, and food sectors</li>
+                        <li><strong>Stakeholder management:</strong> Built and maintained relationships with 50+ key stakeholders</li>
+                        <li><strong>Interactive dashboards:</strong> Designed 15+ dashboards with Looker Studio and Power BI</li>
+                        <li><strong>Process automation:</strong> Reduced manual reporting time by 40% using Python</li>
+                        <li><strong>AI Legislab:</strong> Contributing to AI platform leveraging Google Cloud, AI, massive web scraping, and React</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Project manager</h3>
+                    <div class="card-meta">Facto Cooperativa | January 2024 - March 2024</div>
+                    <ul>
+                        <li><strong>European project management:</strong> Executed and managed one European project (resources, budget, time, and results)</li>
+                        <li><strong>Project design:</strong> Designed outcome-oriented economic development projects using logical framework, Gantt chart, Kanban, budget, and evaluation methodology</li>
+                        <li><strong>Fundraising:</strong> Identified funds and conducted fundraising at regional, state, and European levels</li>
+                        <li><strong>Training & consultancy:</strong> Provided training and consultancy in project design, management, and KPIs</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Public policy coordinator for Latin America</h3>
+                    <div class="card-meta">Cocampo | October 2023 - February 2024</div>
+                    <ul>
+                        <li><strong>Strategic partnerships:</strong> Identified and established a minimum of 10 collaboration relationships annually with governments and public administrations in Latin America</li>
+                        <li><strong>Media relations:</strong> Managed stakeholder relationships with key media outlets and relevant journalists to secure 15+ mentions of Cocampo in major media outlets annually</li>
+                        <li><strong>Performance tracking:</strong> Tracked performance metrics, measured the impact of promotional activities, and achieved a 20% increase in Cocampo's recognition within one year</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Research assistant</h3>
+                    <div class="card-meta">GRITIM - Pompeu Fabra University | February 2022 - September 2023</div>
+                    <ul>
+                        <li><strong>Applied research:</strong> Built 5 reports with statistical insights that potentially upgrade up to 10 points local governance metrics</li>
+                        <li><strong>Academic publications:</strong> Contributed to 1 book and 10 papers, improving in 10% the average of annual publications</li>
+                        <li><strong>Performance reporting:</strong> Created a performance reporting template for cities combining data, achieving a 50% reduction in the preparation time of standard materials</li>
+                        <li><strong>International events:</strong> Organized 3 major events with Australian, Canadian and Mediterranean universities, bringing together more than 100 people</li>
+                        <li><strong>Digital impact:</strong> Drafted news of 10+ key events in 2022, allowing an increase of 20% in visits to GRITIM website</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Consultant</h3>
+                    <div class="card-meta">Intercultures Spain & LATAM | June 2021 - January 2022</div>
+                    <ul>
+                        <li><strong>Focus groups:</strong> Coordinated 10+ focus groups and moderated 10+ discussion spaces</li>
+                        <li><strong>Training development:</strong> Prepared 5+ classes and webinars to launch courses</li>
+                        <li><strong>Research reports:</strong> Produced 2 reports with inclusion and diversity data used to train 50 employees from companies such as Adevinta and Johnson & Johnson</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Policy advisor</h3>
+                    <div class="card-meta">National Congress of Argentina | March 2015 - December 2019</div>
+                    <ul>
+                        <li><strong>Major events:</strong> Arranged 3 major events on accessibility awareness, disability rights and accessible tourism</li>
+                        <li><strong>Strategic partnerships:</strong> Fostered 10+ creative partnerships with key opinion leaders, politicians, non profits, advocacy groups and stakeholders</li>
+                        <li><strong>Policy monitoring:</strong> Monitored key countries across the Latin America region and collected 15+ public policies</li>
+                        <li><strong>Resource management:</strong> Managed 50+ consultants and marshalled resources to execute innovative plans</li>
+                        <li><strong>Legislative projects:</strong> Negotiated 30+ projects in Parliamentary Committees and directed 30+ parliamentary projects and lead the drafting of 8 bills</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Chief advisor</h3>
+                    <div class="card-meta">National Congress of Argentina | February 2017 - March 2018</div>
+                    <ul>
+                        <li><strong>Team leadership:</strong> Coordinated a team of 10 people (administrative and technical) with a year budget of 7,000 dollars</li>
+                        <li><strong>Strategic planning:</strong> Designed 5+ political strategies with 4 internal cross-functional teams to speed up negotiations and achieved an increase of 15% rulings than the previous year</li>
+                        <li><strong>Process improvement:</strong> Outlined a strategy to share progress and cross-suggestions, leading to a rise of 5% projects submitted over the previous year</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section id="projects" class="section">
+            <h2>Featured projects</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>AI Legislab - legislative intelligence</h3>
+                    <div class="card-meta">Current project - LLYC</div>
+                    <p>Development of a platform combining Google Cloud, AI, massive web scraping, and React to transform legislative data into strategic intelligence for public and private sector clients.</p>
+                    <p><strong>Technical stack:</strong> React.js frontend with TypeScript, Node.js backend, Google Cloud Functions for serverless processing, BigQuery for data warehousing, Python-based web scrapers with Beautiful Soup and Selenium, Natural Language Processing using Google AI APIs, Docker containerization for deployment scalability.</p>
+                    <strong>Technologies:</strong> Google Cloud, React, Python, AI/ML, BigQuery, Docker
+                    <br><br>
+                    <a href="https://ailegislab.llyc.app/search" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">🚀 View live application →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Interactive presentations - Gamma platform</h3>
+                    <div class="card-meta">Content development & visualization</div>
+                    <p>Created dynamic, data-driven presentations using Gamma's AI-powered platform for client deliverables and strategic communications. Leveraged advanced templating and interactive elements for stakeholder engagement.</p>
+                    <p><strong>Technical Implementation:</strong> Integrated data visualizations using D3.js charts, implemented responsive design principles, utilized Gamma's API for automated content generation, embedded real-time data feeds from external sources, optimized for cross-platform compatibility and mobile responsiveness.</p>
+                    <strong>Features:</strong> Interactive charts, Real-time data integration, Responsive design, API connectivity
+                    <br><br>
+                    <a href="https://spains-policy-trends-202-e1f0ldw.gamma.site/" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">📊 View platform →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Nuclear analysis report - Web application prototype</h3>
+                    <div class="card-meta">Vercel v0 development</div>
+                    <p>Developed interactive web application prototypes using Vercel's v0 platform for rapid deployment of legislative analysis tools. Created specialized interface for nuclear policy research and documentation.</p>
+                    <p><strong>Technical architecture:</strong> Built with Next.js 14 and React Server Components, implemented real-time collaboration features using WebSockets, integrated with PostgreSQL database via Prisma ORM, deployed using Vercel's Edge Functions for optimal performance, incorporated Tailwind CSS for responsive UI design.</p>
+                    <strong>Technologies:</strong> Next.js, React, PostgreSQL, Prisma, WebSockets, Vercel Edge
+                    <br><br>
+                    <a href="https://reports-ai-legislab-7q-juanpablosantangelo-llycglobals-projects.vercel.app/" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">⚛️ View development platform →</a>
+                </div>
+
+                <div class="card">
+                    <h3>EuroMedMig Manifesto for City Governance of Mediterranean Migration</h3>
+                    <div class="card-meta">GRITIM - Pompeu Fabra University</div>
+                    <p>Co-authored comprehensive policy manifesto presented at Palau de Pedralbes, Barcelona, providing strategic framework for Mediterranean cities to manage migration governance. The manifesto outlines evidence-based recommendations for urban policy makers to develop inclusive, sustainable approaches to migration management across Mediterranean metropolitan areas.</p>
+                    <p><strong>Research methodology:</strong> Quantitative analysis using R and SPSS, implemented machine learning clustering algorithms for demographic segmentation, utilized GIS mapping with QGIS for spatial analysis, developed statistical models using regression analysis and hypothesis testing. Conducted comparative policy analysis across 15+ Mediterranean cities.</p>
+                    <p><strong>Policy Impact:</strong> Framework adopted by municipal authorities for local governance strategy development, providing actionable insights for improving integration policies and urban planning approaches to migration challenges.</p>
+                    <strong>Impact:</strong> Potential improvement in local governance metrics up to 10 points
+                    <br><br>
+                    <a href="https://www.upf.edu/en/web/politiques/home/-/asset_publisher/fZjeFt1Yyu1I/content/euromedmig-manifesto-for-a-city-governance-of-mediterranean-migration/10193/maximized" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">📄 View complete Manifesto →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Colab to BigQuery Migration & Looker Studio Dashboard</h3>
+                    <div class="card-meta">LLYC - Data Optimization</div>
+                    <p>Led migration of analytical projects from Google Colab to BigQuery, optimizing data processing and improving analysis scalability. The entire migration was designed to support comprehensive data visualization through Looker Studio dashboards.</p>
+                    <p><strong>Migration strategy:</strong> Converted Jupyter notebooks to BigQuery SQL procedures, implemented data pipeline orchestration using Google Cloud Scheduler, optimized query performance with partitioning and clustering strategies, established automated data refresh workflows to feed real-time dashboards in Looker Studio.</p>
+                    <strong>Benefit:</strong> Enhanced scalability and data processing with interactive visualization
+                    <br><br>
+                    <a href="https://lookerstudio.google.com/reporting/4b16321d-951c-4ce3-bec7-56f5de7e72c2" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">📈 View live dashboard →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Process optimization with Python</h3>
+                    <div class="card-meta">LLYC - Automation</div>
+                    <p>Implementation of automated solutions that reduced manual report generation time by 40%, significantly improving operational efficiency.</p>
+                    <p><strong>Technical implementation:</strong> Developed Python scripts using Pandas for data manipulation, automated Excel report generation with openpyxl, implemented web scraping using requests and BeautifulSoup, created scheduled tasks with cron jobs, integrated with REST APIs for data collection.</p>
+                    <strong>Result:</strong> 40% reduction in reporting time
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <h2>Technical & professional skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Data Analysis & BI</h4>
+                    <div class="skill-item">PowerBI (Advanced)</div>
+                    <div class="skill-item">Looker Studio (Advanced)</div>
+                    <div class="skill-item">SQL (Intermediate)</div>
+                    <div class="skill-item">BigQuery (Intermediate)</div>
+                    <div class="skill-item">R (Intermediate)</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Programming & development</h4>
+                    <div class="skill-item">Python (Intermediate)</div>
+                    <div class="skill-item">HTML (Advanced)</div>
+                    <div class="skill-item">CSS (Intermediate)</div>
+                    <div class="skill-item">React</div>
+                    <div class="skill-item">Vercel v0</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Cloud & tools</h4>
+                    <div class="skill-item">Google Cloud</div>
+                    <div class="skill-item">MS Office (Advanced)</div>
+                    <div class="skill-item">Gamma</div>
+                    <div class="skill-item">Kumu (Stakeholder mapping)</div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>Research & policy</h4>
+                    <div class="skill-item">Quantitative and qualitative research</div>
+                    <div class="skill-item">Public policy</div>
+                    <div class="skill-item">Legislative analysis</div>
+                    <div class="skill-item">Stakeholder management</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="section">
+            <h2>Academic formation</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>PhD in Law</h3>
+                    <div class="card-meta">Rovira i Virgili University | May 2025 - October 2028</div>
+                    <p>PhD candidate with focus on public policy and data analysis applied to law.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Master in Data Science</h3>
+                    <div class="card-meta">Nuclio Digital School - UVic University | May - October 2023</div>
+                    <p>Specialization in advanced data analysis techniques, machine learning and visualization.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Master in Public and Social Policies</h3>
+                    <div class="card-meta">Barcelona School of Management - Pompeu Fabra - Johns Hopkins | 2019-2021</div>
+                    <p>Interdisciplinary training in design, implementation and evaluation of public policies.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Law degree</h3>
+                    <div class="card-meta">National University of La Plata | March 2013 - September 2018</div>
+                    <p>Second degree in Law with specialization in public and legislative law.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Bachelor in Political Science</h3>
+                    <div class="card-meta">University of San Andrés, Buenos Aires | March 2010 - June 2013</div>
+                    <p>First degree with focus on political analysis, public policies and institutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages" class="section">
+            <h2>Language competencies</h2>
+            <div class="languages-list">
+                <div class="language-item">
+                    <span class="language-name">Spanish</span>
+                    <span class="language-level">Native</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">English</span>
+                    <span class="language-level">Advanced (C1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Italian</span>
+                    <span class="language-level">Advanced (C1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">French</span>
+                    <span class="language-level">Intermediate (B2.1)</span>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Portuguese</span>
+                    <span class="language-level">Basic (A1)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Honors and Recognition -->
+        <section id="honors" class="section">
+            <h2>Honors</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Summer School in European Environmental Taxation and Policies (SUSEET 2.0) <span class="badge">New</span></h3>
+                    <div class="card-meta">September 2025 - University of Naples Federico II | Jean Monnet Module - European Commission</div>
+                    <p>Selected participant for the prestigious European Commission-funded Jean Monnet Module on European Environmental Taxation. SUSEET is organized by the University of Naples Federico II in direct collaboration with European institutions, featuring high-level speakers from the European Commission, European Court of Justice, and leading European universities.</p>
+                    <p><strong>European institutional framework:</strong> The program includes presentations from European Commission officials (DG Environment, DG TAXUD, Legal Service), sessions on EU climate legislation, ECJ case-law analysis, and comprehensive coverage of EU environmental policy instruments including ETS, CBAM, and EU climate directives.</p>
+                    <p><strong>Program highlights:</strong> In-presence sessions from September 8-13, 2025, doctoral research presentations on environmental taxation, group work development, and networking with international researchers and European policy experts. The program directly addresses EU internal market objectives, European environmental principles, and the intersection of EU law with national environmental taxation policies.</p>
+                    <br>
+                    <a href="https://www.suseet.eu/" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">🌍 Visit SUSEET official website →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Regional Academy on the United Nations (RAUN) <span class="badge">New</span></h3>
+                    <div class="card-meta">2025-2026 - Barcelona - Vienna | UN 80th Anniversary Program</div>
+                    <p>Selected as one of only 42 participants globally for the prestigious Regional Academy on the United Nations, a highly competitive international education program that brings together UN organizations and outstanding Master's and PhD students from across Europe. This seven-month intensive program combines direct collaboration with UN agencies, OSCE, and leading international organizations.</p>
+                    <p><strong>Program framework - "Global Transformation for Future Generations":</strong> As the United Nations marks its 80th anniversary, the 2025-2026 theme addresses global transformation needed to protect future generations through examination of economic, sociopolitical, and technological systems. The program includes lectures by high-ranking UN experts, hands-on research projects in cooperation with UN organizations, and policy brief development addressing contemporary global challenges.</p>
+                    <p><strong>Structure & deliverables:</strong> Two in-person sessions (October 2025 in Barcelona, May 2026 in Vienna at UN Headquarters) plus online workshops. Collaborative research with 3-4 member teams producing 12-15 page policy briefs based on desk research and expert consultations with UN officials, OSCE representatives, and Ban Ki-Moon Centre for Global Citizens. Final presentations at UN Headquarters Vienna.</p>                    <br>
+                    <a href="https://www.ra-un.org/" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-flex; align-items: center; gap: 8px;"><img src="https://cdn-icons-png.flaticon.com/128/12361/12361214.png" alt="UN" style="width: 20px; height: 20px;"> Visit RAUN official website →</a>
+                </div>
+
+                <div class="card">
+                    <h3>HERA Research project scholarship</h3>
+                    <div class="card-meta">2022 - Pompeu Fabra University</div>
+                    <p>Research scholarship for the project "Public Spaces: Culture and Integration in Europe".</p>
+                    <br>
+                    <a href="https://www.era-learn.eu/network-information/networks/hera-jrp-ps/hera-joint-research-programme-201cpublic-spaces-culture-and-intergration-in-europe201d/moving-market-places" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">🔬 View HERA project details →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Konrad Adenauer Stiftung foundation</h3>
+                    <div class="card-meta">2016 - Hidalgo City, Mexico</div>
+                    <p>Scholarship for political training program in "Political Competence and Humanism".</p>
+                    <br>
+                    <a href="https://www.kas.de/es/web/parteien-lateinamerika/veranstaltungsberichte/detail/-/content/diplomkurs-konrad-adenauer-politische-kompetenz-und-humanismus-im-21.-jahrhundert2" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">🏛️ View KAS program details →</a>
+                </div>
+
+                <div class="card">
+                    <h3>Fulbright scholarship</h3>
+                    <div class="card-meta">2015 - United States</div>
+                    <p>International Seminar for Young Leaders on "The United States today: the foundations of foreign and domestic politics".</p>
+                    <br>
+                    <a href="https://fulbright.org.ar/seminario-internacional-para-jovenes-lideres-en-argentina/" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold; background-color: #f1f5f9; padding: 8px 16px; border-radius: 5px; display: inline-block;">🏛️ View Fulbright program →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section class="section">
+            <h2>Publications</h2>
+            <div class="card">
+                <h3>Climate Justice, Migration and Refuge in Catalonia</h3>
+                <div class="card-meta">Santangelo, J.P & Zapata-Barrero, R. (December 4th, 2023)</div>
+                <p>Published by Fundació ACSAR. A comprehensive analysis of climate justice issues related to migration and refugee situations in Catalonia.</p>
+                <a href="https://www.upf.edu/documents/222586661/0/Informe+Justicia+Clim%C3%A0tica+i+Immigracio.pdf/a2fdea0d-0c6c-303a-97a5-c893c66baa47?t=1700140601160" target="_blank" style="color: #1e3c72; text-decoration: none; font-weight: bold;">View publication →</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h3>Interested in collaborating?</h3>
+      
+            &nbsp;
+          
+            <div class="social-links">
+                <div class="social-link" onclick="openContactModal()" title="Contact Info">📧</div>
+                <div class="social-link" onclick="window.open('https://www.linkedin.com/in/juan-pablo-santangelo', '_blank')" title="LinkedIn">💼</div>
+                <div class="social-link" onclick="window.open('https://github.com/JPS-777', '_blank')" title="GitHub">💻</div>
+                <div class="social-link" onclick="openContactModal()" title="Phone">📱</div>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.8;">
+                © 2025 Juan Pablo Santangelo. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <h2 style="color: #1e3c72; margin-bottom: 1.5rem; text-align: center;">Contact information</h2>
+            
+            <div class="contact-modal-item" onclick="copyToClipboard('juan.pablo.santangelo@gmail.com', this)">
+                <div class="icon">📧</div>
+                <div class="info" style="flex: 1;">
+                    <h4>Email</h4>
+                    <p>juan.pablo.santangelo@gmail.com</p>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
+            
+            <div class="contact-modal-item" onclick="copyToClipboard('+34 610 34 2581', this)">
+                <div class="icon">📱</div>
+                <div class="info" style="flex: 1;">
+                    <h4>Phone</h4>
+                    <p>+34 610 34 2581</p>
+                </div>
+                <button class="copy-btn">Copy</button>
+            </div>
+            
+            <div class="contact-modal-item" onclick="window.open('https://www.linkedin.com/in/juan-pablo-santangelo', '_blank')">
+                <div class="icon">🌐</div>
+                <div class="info" style="flex: 1;">
+                    <h4>LinkedIn</h4>
+                    <p>juan-pablo-santangelo</p>
+                </div>
+                <button class="copy-btn" style="background: #0077b5;">Visit</button>
+            </div>
+            
+            <div class="contact-modal-item" onclick="window.open('https://github.com/JPS-777', '_blank')">
+                <div class="icon">💻</div>
+                <div class="info" style="flex: 1;">
+                    <h4>GitHub</h4>
+                    <p>JPS-777</p>
+                </div>
+                <button class="copy-btn" style="background: #333;">Visit</button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem; color: #666; font-size: 0.9rem;">
+                Click to copy contact information or visit profiles
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+        
+        function closeMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            const isClickInsideNav = navMenu.contains(event.target) || hamburger.contains(event.target);
+            
+            if (!isClickInsideNav && navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Contact Modal Functions
+        function openContactModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+        
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactModal();
+            }
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text).then(function() {
+                const button = element.querySelector('.copy-btn');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copy-success');
+                
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.classList.remove('copy-success');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Error copying to clipboard: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const button = element.querySelector('.copy-btn');
+                button.textContent = 'Copied!';
+                button.classList.add('copy-success');
+                setTimeout(function() {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copy-success');
+                }, 2000);
+            });
+        }
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Animation for statistics
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.stat-item').forEach(item => {
+            observer.observe(item);
+        });
+        
+        // Typing effect for main title (optional)
+        const title = document.querySelector('.header h1');
+        if (title) {
+            const text = title.textContent;
+            title.textContent = '';
+            let index = 0;
+            
+            const typeWriter = () => {
+                if (index < text.length) {
+                    title.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 500);
+        }
+    </script>
+</body>
+</html>
