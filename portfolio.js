@@ -50,14 +50,40 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.style.animation = 'fadeInUp 0.6s ease forwards'; });
 }, { threshold: 0.5, rootMargin: '0px 0px -100px 0px' });
 document.querySelectorAll('.stat-item').forEach(item => observer.observe(item));
-const title = document.querySelector('.header h1');
-if (title) {
-    const text = title.textContent;
-    title.textContent = '';
-    let index = 0;
-    const typeWriter = () => { if (index < text.length) { title.textContent += text.charAt(index); index++; setTimeout(typeWriter, 100); } };
-    setTimeout(typeWriter, 500);
-}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const title = document.querySelector('.header h1');
+    
+    if (title) {
+        // Guardamos el contenido HTML completo (incluyendo <em>Santangelo</em>)
+        const fullHTML = title.innerHTML; 
+        title.innerHTML = ''; // Vaciamos para empezar a escribir
+        title.classList.add('ready'); // Lo hacemos visible (pero está vacío)
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < fullHTML.length) {
+                // LÓGICA CLAVE: Si detecta una etiqueta HTML (como <em...>)
+                if (fullHTML.charAt(i) === '<') {
+                    // Busca dónde termina la etiqueta '>' para ponerla de golpe
+                    let tagEnd = fullHTML.indexOf('>', i);
+                    title.innerHTML += fullHTML.substring(i, tagEnd + 1);
+                    i = tagEnd + 1;
+                } else {
+                    // Si es texto normal, lo escribe letra a letra
+                    title.innerHTML += fullHTML.charAt(i);
+                    i++;
+                }
+                setTimeout(typeWriter, 75); // Velocidad (ms entre letras)
+            }
+        }
+        
+        // Esperamos medio segundo antes de empezar para que la página cargue bien
+        setTimeout(typeWriter, 500);
+    }
+});
+// --- BLOQUE CORREGIDO TERMINA AQUÍ ---
+
 document.addEventListener('DOMContentLoaded', function() {
     const backToTopButton = document.getElementById('backToTop');
     if (backToTopButton) {
